@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch src --exec ts-node src/index.ts",
-    "start": "ts-node src/index.ts",
+    "start": "tsc && node dist/index.js",
     "migrate:production": "cd db && knex migrate:latest --env production && cd ../",
     "migrate:dev": "cd db && knex migrate:latest && cd ../" 
   },
