@@ -8,6 +8,7 @@ import todo from "./routes/todo";
 import dotenv from "dotenv";
 dotenv.config();
 
+const port = process.env.PORT || 3000;
 export interface ApiRequest extends Request {
   user?: User;
 }
@@ -25,5 +26,6 @@ app.use(user);
 app.use(auth);
 app.use(todo);
 
-const port = process.env.PORT || 3000;
+app.get("/", (req, res) => res.status(200).send("Running"));
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
