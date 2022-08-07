@@ -26,6 +26,6 @@ app.use(user);
 app.use(auth);
 app.use(todo);
 
-app.get("/", (req, res) => res.status(200).send("Running"));
+app.get("/", (req: Request, res: Response) => res.status(200).send("Running"));
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
