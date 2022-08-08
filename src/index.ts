@@ -13,7 +13,7 @@ export interface ApiRequest extends Request {
   user?: User;
 }
 const corsOptions = {
-  origin: "https://todoical-frontend.herokuapp.com/",
+  origin: "https://todoical-frontend.herokuapp.com",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
