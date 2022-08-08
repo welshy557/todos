@@ -18,7 +18,7 @@ export interface ApiRequest extends Request {
 //   optionSuccessStatus: 200,
 // };
 
-var whitelist = [
+const whitelist = [
   "http://localhost:3000",
   "https://todoical-frontend.herokuapp.com",
 ];
