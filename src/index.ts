@@ -12,8 +12,18 @@ const port = process.env.PORT || 3001;
 export interface ApiRequest extends Request {
   user?: User;
 }
+// const corsOptions = {
+//   origin: "https://todoical-frontend.herokuapp.com",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+
+var whitelist = [
+  "http://localhost:3000",
+  "https://todoical-frontend.herokuapp.com",
+];
 const corsOptions = {
-  origin: "https://todoical-frontend.herokuapp.com",
+  origin: whitelist,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
