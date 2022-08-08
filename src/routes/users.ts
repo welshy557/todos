@@ -67,23 +67,13 @@ user.put(
   async (req: ApiRequest, res: Response) => {
     try {
       const { id } = req.params;
-
-      const { firstName, lastName, email, password } = req.body;
-
-      const queryParam = {} as DBUser;
-
-      firstName ? (queryParam["first_name"] = firstName) : null;
-      lastName ? (queryParam["last_name"] = lastName) : null;
-      email ? (queryParam["email"] = email) : null;
-      password ? (queryParam["password"] = password) : null;
-
-      if (queryParam.password) {
-        const password = await bcrypt.hash(queryParam.password, 10);
+      if (req.body.password) {
+        const password = await bcrypt.hash(req.body.password, 10);
         await db("users")
           .where({ id: id })
-          .update({ ...queryParam, password: password });
+          .update({ ...req.body, password: password });
       } else {
-        await db("users").where({ id: id }).update(queryParam);
+        await db("users").where({ id: id }).update(req.body);
       }
       res.status(200).send("Success");
     } catch (err) {

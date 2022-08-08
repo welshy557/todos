@@ -12,7 +12,6 @@ const config: { [key: string]: Knex.Config } = {
       database: process.env.LOCAL_DATABASE,
       user: process.env.LOCAL_USER,
       password: process.env.LOCAL_PASSWORD,
-      ssl: true,
     },
     pool: {
       min: 2,

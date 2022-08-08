@@ -8,7 +8,7 @@ import todo from "./routes/todo";
 import dotenv from "dotenv";
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 export interface ApiRequest extends Request {
   user?: User;
 }

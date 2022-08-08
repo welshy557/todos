@@ -11,7 +11,6 @@ const authenticateToken = (
   next: NextFunction
 ) => {
   const { authorization } = req.headers;
-  console.log(authorization);
   const token = authorization && authorization?.split(" ")[1];
   if (token == null) {
     return res.status(403).send("Unauthorized");

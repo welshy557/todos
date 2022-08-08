@@ -2,20 +2,22 @@ import express, { Response, Request } from "express";
 import bcrypt from "bcrypt";
 
 import authenticateToken from "../middleware/auth-token";
-import matchUserId from "../middleware/match-user";
 import db from "../../db/db";
+import { ApiRequest } from "..";
+
+interface Todo {
+  todo: string;
+  completed: boolean;
+}
 
 const todo = express.Router();
 
 todo.get(
-  "/todos/:userId",
+  "/todos",
   authenticateToken,
-  matchUserId,
-  async (req: Request, res: Response) => {
+  async (req: ApiRequest, res: Response) => {
     try {
-      const { userId } = req.params;
-      console.log(userId);
-      const todo = await db("todos").select().where({ user_id: userId });
+      const todo = await db("todos").select().where({ user_id: req.user?.id });
       res.status(200).send(todo);
     } catch (err) {
       console.log(err);
@@ -25,12 +27,11 @@ todo.get(
 );
 
 todo.post(
-  "/todos/:userId",
+  "/todos",
   authenticateToken,
-  matchUserId,
-  async (req: Request, res: Response) => {
+  async (req: ApiRequest, res: Response) => {
     try {
-      await db("todos").insert({ ...req.body, user_id: req.params.userId });
+      await db("todos").insert({ ...req.body, user_id: req.user?.id });
       res.status(200).send("Success");
     } catch (err) {
       res.status(500).send(err);
@@ -38,10 +39,26 @@ todo.post(
   }
 );
 
-todo.delete(
-  "/todos/:userId/:id",
+todo.put(
+  "/todos/:id",
   authenticateToken,
-  matchUserId,
+  async (req: ApiRequest, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      await db("todos").where({ id: id }).update(req.body);
+
+      res.status(200).send("success");
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+  }
+);
+
+todo.delete(
+  "/todos/:id",
+  authenticateToken,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
