@@ -5,9 +5,8 @@ The backend is built primarly with node.js, Knex, and a Postgresql database.
 
 The database for this app is hosted via the free database service, bit.io
 
-If you wish to use the backend for this app locally, you must setup a postgresql database either locally or online as the hosted database is password protected via hidden env variables.
+If you wish to use the backend for this app locally, you must setup a postgresql database locally.
 
-This repo is automatically redeployed to Heroku any time a new commit is made. Meaning the hosted service is always up-to-date with the repo.
 
 Inital Setup:
 - Create a postgresql database.
@@ -24,7 +23,5 @@ Scripts:
 - yarn start - Used by Heroku to start the server
 - yarn migrate:production - Rollsback and migrates the production database
 - yarn migrate:dev - Rollsback and migrates the dev database
-
-This backend service is hosted at: https://todoical.herokuapp.com/
 
 Repo for frontend of the app is located at: https://github.com/welshy557/todos-frontend
